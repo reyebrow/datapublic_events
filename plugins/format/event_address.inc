@@ -20,44 +20,54 @@ $plugin = array(
  * @see CALLBACK_addressfield_format_callback()
  */
 function event_address_format_address_generate(&$format, $address, $context = array()) {
+  $format['#attached']['css'][] = drupal_get_path('module', 'datapublic_events') . '/plugins/format/event_address.css';
 
-  $format['#attached']['css'][] = drupal_get_path('module', 're_event') . '/plugins/format/event_address.css';
+  $need_comma = FALSE;
 
-  $need_comma = False;
-
-  if (isset($address['organisation_name']) && $address['organisation_name'] != "") {
+  if (isset($address['organisation_name']) && $address['organisation_name'] != '') {
     $format['organisation_name'] = array(
       '#title' => t('Company'),
       '#weight' => 1,
     );
-    $need_comma = True;
+    $need_comma = TRUE;
   }
-  if (isset($address['thoroughfare']) && $address['thoroughfare'] != "") {
+  if (isset($address['thoroughfare']) && $address['thoroughfare'] != '') {
     $format['thoroughfare'] = array(
       '#title' => t('Address 1'),
       '#weight' => 2,
     );
-    if ($need_comma) $format['thoroughfare']['#prefix'] = ', ';
-    $need_comma = True;
+    
+    if ($need_comma) {
+      $format['thoroughfare']['#prefix'] = ', ';
+    }
+    $need_comma = TRUE;
   }
-  if (isset($address['premise']) && $address['premise'] != "") {
+  
+  if (isset($address['premise']) && $address['premise'] != '') {
     $format['premise'] = array(
       '#title' => t('Address 2'),
       '#weight' => 3,
     );
-    if ($need_comma) $format['premise']['#prefix'] = ', ';
-    $need_comma = True;
+    
+    if ($need_comma) {
+      $format['premise']['#prefix'] = ', ';
+    }
+    $need_comma = TRUE;
   }
-  if (isset($address['locality']) && $address['locality'] != "") {
+  
+  if (isset($address['locality']) && $address['locality'] != '') {
     $format['locality'] = array(
       '#title' => t('City'),
       '#weight' => 4,
     );
-    if ($need_comma) $format['locality']['#prefix'] = ', ';
-    $need_comma = True;
+    
+    if ($need_comma) {
+      $format['locality']['#prefix'] = ', ';
+    }
+    $need_comma = TRUE;
   }
   /*
-  if (isset($address['postal_code']) && $address['postal_code'] != "") {
+  if (isset($address['postal_code']) && $address['postal_code'] != '') {
     $format['postal_code'] = array(
       '#title' => t('Postal Code'),
       '#prefix' => ', ',
@@ -318,8 +328,11 @@ function event_address_format_address_generate(&$format, $address, $context = ar
   $format['administrative_area'] = array(
     '#weight' => 5,
   );
-  if ($need_comma) $format['administrative_area']['#prefix'] = ', ';
-  $need_comma = True;
+  
+  if ($need_comma) {
+    $format['administrative_area']['#prefix'] = ', ';
+  }
+  $need_comma = TRUE;
 
   /*
   // Those countries tend to put the postal code after the locality.

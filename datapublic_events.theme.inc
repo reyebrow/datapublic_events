@@ -5,11 +5,12 @@
  *
  */
 
+
 /**
  * Implements hook_theme().
  */
-function datapublic_events_theme($existing) {
-  $template_path = drupal_get_path('module', 'datapublic_events') . '/theme';
+function datapublic_events_theme($existing, $type, $theme, $path) {
+  $template_path = $path . '/theme';
 
   $item_event = isset($existing['node']) ? $existing['node'] : array();
   $item_event['path'] = $template_path;
@@ -23,23 +24,22 @@ function datapublic_events_theme($existing) {
   $item_date_range['function'] = 'datapublic_events_date_display_range';
 
   return array(
-   'node__event' => $item_event,
-   'location__event' => $item_location,
-   'date_display_range' => $item_date_range
+    'node__event' => $item_event,
+    'location__event' => $item_location,
+    'date_display_range' => $item_date_range
   );
 } // datapublic_events_theme()
 
 
 /**
  * Implements theme_date_display_range().
- * this is used to instantiate a new plugin for formatting addresses.
  */
-function datapublic_events_date_display_range($vars) {
-  $date1 = $vars['date1'];
-  $date2 = $vars['date2'];
-  $timezone = $vars['timezone'];
-  $attributes_start = $vars['attributes_start'];
-  $attributes_end = $vars['attributes_end'];
+function datapublic_events_date_display_range($variables) {
+  $date1 = $variables['date1'];
+  $date2 = $variables['date2'];
+  $timezone = $variables['timezone'];
+  $attributes_start = $variables['attributes_start'];
+  $attributes_end = $variables['attributes_end'];
 
   // Wrap the result with the attributes.
   return t('!start-date - !end-date', array(
@@ -62,10 +62,10 @@ function datapublic_events_ctools_plugin_directory($module, $plugin) {
 
 
 /**
- * Implements of template_preprocess_node().
+ * Implements template_preprocess_node().
  */
-function datapublic_events_preprocess_node(&$vars) {
-  switch ($vars['type']) {
+function datapublic_events_preprocess_node(&$variables) {
+  switch ($variables['type']) {
     // Event content type:
     case 'event':
       // Prepare various date and time formats:
@@ -91,41 +91,41 @@ function datapublic_events_preprocess_node(&$vars) {
       }
 
       // Cache event begin and end dates in a convenient way for this request:
-      $event_start = $vars['field_event_start_date'][0]['value'];
-      $event_end = $vars['field_event_start_date'][0]['value2'];
+      $event_start = $variables['field_event_start_date'][0]['value'];
+      $event_end = $variables['field_event_start_date'][0]['value2'];
 
       // Find site timezone:
-      $timezone_name = $vars['field_date'][0]['timezone'] ? $vars['field_date'][0]['timezone'] : drupal_get_user_timezone();
+      $timezone_name = $variables['field_date'][0]['timezone'] ? $variables['field_date'][0]['timezone'] : drupal_get_user_timezone();
 
       // Create date module date objects for the timezone we worked out:
       $date_start = new DateObject($event_start, $timezone_name);
       $date_end = new DateObject($event_end, $timezone_name);
 
       // Get formatted start and end dates:
-      $vars['from_date'] = date_format_date($date_start, 'custom', $date_format);
-      $vars['to_date'] = date_format_date($date_end, 'custom', $date_format);
+      $variables['from_date'] = date_format_date($date_start, 'custom', $date_format);
+      $variables['to_date'] = date_format_date($date_end, 'custom', $date_format);
 
       // Get formatted start and end times:
-      $vars['from_time'] = date_format_date($date_start, 'custom', $time_format);
-      $vars['to_time'] = date_format_date($date_end, 'custom', $time_format);
+      $variables['from_time'] = date_format_date($date_start, 'custom', $time_format);
+      $variables['to_time'] = date_format_date($date_end, 'custom', $time_format);
 
       // If start and end are the same day then don't display the "to" date:
-      if ($vars['from_date'] === $vars['to_date']) {
-        unset($vars['to_date']);
+      if ($variables['from_date'] === $variables['to_date']) {
+        unset($variables['to_date']);
       }
 
       // If the start and end TIMES are the same, this is an all-day event:
-      if ($vars['field_date'][0]['value'] === $vars['field_event_start_date'][0]['value2']) {
+      if ($variables['field_date'][0]['value'] === $variables['field_event_start_date'][0]['value2']) {
         // Set variables for node template and for google calendar link (below):
         $all_day = TRUE;
-        $vars['from_time'] = t('(All day)');
+        $variables['from_time'] = t('(All day)');
         // Unset both "to" time and date:
-        unset($vars['to_time']);
-        unset($vars['to_date']);
+        unset($variables['to_time']);
+        unset($variables['to_date']);
       }
 
       // Create $repeat_rule var:
-      $vars['repeat_rule'] = date_repeat_rrule_description($vars['field_event_start_date'][0]['rrule'], $repeat_format);
+      $variables['repeat_rule'] = date_repeat_rrule_description($variables['field_event_start_date'][0]['rrule'], $repeat_format);
       break;
   }
 } // datapublic_events_preprocess_node()

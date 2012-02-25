@@ -11,15 +11,15 @@
 function datapublic_events_theme($existing) {
   $template_path = drupal_get_path('module', 'datapublic_events') . '/theme';
 
-  $item_event = $existing['node'];
+  $item_event = isset($existing['node']) ? $existing['node'] : array();
   $item_event['path'] = $template_path;
   $item_event['template'] = 'node--event';
 
-  $item_location = $existing['location'];
+  $item_location = isset($existing['location']) ? $existing['location'] : array();
   $item_location['path'] = $template_path;
   $item_location['template'] = 'location--event';
 
-  $item_date_range = $existing['date_display_range'];
+  $item_date_range = isset($existing['date_display_range']) ? $existing['date_display_range'] : array();
   $item_date_range['function'] = 'datapublic_events_date_display_range';
 
   return array(

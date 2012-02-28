@@ -529,7 +529,7 @@ function datapublic_events_views_default_views() {
   $handler->display->display_options['fields']['field_event_location']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_event_location']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_event_location']['element_type'] = 'div';
-  $handler->display->display_options['fields']['field_event_location']['element_class'] = 'event-location';
+  $handler->display->display_options['fields']['field_event_location']['element_class'] = 'event-location subtitle';
   $handler->display->display_options['fields']['field_event_location']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_event_location']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_event_location']['hide_empty'] = 0;

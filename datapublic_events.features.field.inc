@@ -62,7 +62,7 @@ function datapublic_events_field_default_fields() {
           'label' => 'hidden',
           'module' => 'text',
           'settings' => array(
-            'trim_length' => 600,
+            'trim_length' => '600',
           ),
           'type' => 'text_summary_or_trimmed',
           'weight' => 0,
@@ -73,15 +73,15 @@ function datapublic_events_field_default_fields() {
       'label' => 'Body',
       'required' => FALSE,
       'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
+        'display_summary' => 'TRUE',
+        'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
         'module' => 'text',
         'settings' => array(
-          'rows' => 20,
-          'summary_rows' => 5,
+          'rows' => '20',
+          'summary_rows' => '5',
         ),
         'type' => 'text_textarea_with_summary',
         'weight' => '2',
@@ -147,7 +147,7 @@ function datapublic_events_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
+        'active' => '1',
         'module' => 'geocoder',
         'settings' => array(
           'geocoder_field' => array(
@@ -225,7 +225,7 @@ function datapublic_events_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
+        'active' => '1',
         'module' => 'addressfield',
         'settings' => array(
           'available_countries' => array(
@@ -326,7 +326,7 @@ function datapublic_events_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
+        'active' => '1',
         'module' => 'date',
         'settings' => array(
           'display_all_day' => 0,
@@ -334,7 +334,7 @@ function datapublic_events_field_default_fields() {
           'input_format' => 'Y-m-d H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
-          'repeat_collapsed' => 1,
+          'repeat_collapsed' => '1',
           'text_parts' => array(),
           'year_range' => '-3:+3',
         ),

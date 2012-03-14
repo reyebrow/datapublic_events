@@ -284,10 +284,6 @@ function datapublic_events_views_default_views() {
   /* Display: Page: Upcoming Events */
   $handler = $view->new_display('page', 'Page: Upcoming Events', 'page');
   $handler->display->display_options['path'] = 'events';
-  $handler->display->display_options['menu']['title'] = 'Events';
-  $handler->display->display_options['menu']['description'] = 'Events';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
 
   /* Display: Page: FullCalendar */
   $handler = $view->new_display('fullcalendar', 'Page: FullCalendar', 'fullcalendar_1');
@@ -843,10 +839,6 @@ function datapublic_events_views_default_views() {
     'und' => 'und',
   );
   $handler->display->display_options['path'] = 'events/past';
-  $handler->display->display_options['menu']['title'] = 'Events';
-  $handler->display->display_options['menu']['description'] = 'Events';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
 
   /* Display: Feed:list */
   $handler = $view->new_display('feed', 'Feed:list', 'feed_1');

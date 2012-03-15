@@ -297,6 +297,13 @@ function datapublic_events_views_default_views() {
   $handler->display->display_options['style_options']['sameWindow'] = TRUE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fullcalendar_node';
+  $handler->display->display_options['row_options']['custom']['fc_title_field'] = 'title';
+  $handler->display->display_options['row_options']['custom']['fc_url_field'] = 'title';
+  $handler->display->display_options['row_options']['custom']['fc_date_field'] = array();
+  $handler->display->display_options['row_options']['custom']['fc_title'] = 0;
+  $handler->display->display_options['row_options']['custom']['fc_url'] = 0;
+  $handler->display->display_options['row_options']['custom']['fc_date'] = 0;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Title */
